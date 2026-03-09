@@ -173,7 +173,6 @@
       background: color-mix(in srgb, var(--card) 92%, transparent);
     }
 
-    /* Map block */
     .map{border-top: 1px solid var(--line); background: color-mix(in srgb, var(--card) 92%, transparent); padding: var(--pad);}
     .mapTop{
       display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
@@ -216,7 +215,6 @@
       box-shadow: var(--shadow2);
     }
 
-    /* Sticky */
     .sticky{
       position:fixed; left:0; right:0; bottom:0;
       background: color-mix(in srgb, var(--card) 92%, transparent);
@@ -266,13 +264,11 @@
         <div class="chip"><span id="emergencyLabel">Notfall</span>: <b id="emergencyPhone">112</b></div>
         <div class="chip"><span id="addressChip"></span></div>
 
-        <!-- Language toggle -->
         <div class="seg" aria-label="Language">
           <button id="langDeBtn" class="active" type="button">DE</button>
           <button id="langEnBtn" type="button">EN</button>
         </div>
 
-        <!-- Theme toggle -->
         <div class="seg" aria-label="Theme">
           <button id="themeAutoBtn" class="active" type="button">Auto</button>
           <button id="themeLightBtn" type="button">Light</button>
@@ -341,7 +337,6 @@
           </div>
         </div>
 
-        <!-- OSM map -->
         <div class="map" aria-label="Karte">
           <div class="mapTop">
             <div class="mapBadge" id="mapHint">Karte (OpenStreetMap)</div>
@@ -448,15 +443,10 @@
         en: "Please call about 15 minutes before arrival so we can coordinate the load-in. Access is via the parking area in front of the building."
       },
 
-      accessTag: {
-        de: "Zufahrt: Parkfläche vor dem Haus",
-        en: "Access: parking area in front"
+      trashText: {
+        de: "Bitte Müll trennen: Papiermüll, Verpackungsmüll (Gelb/Plastik) und Restmüll. Sondermüll bitte immer kurz mit dem Studiomeister absprechen.",
+        en: "Please separate waste: paper waste, packaging waste (recycling/plastic) and residual waste. Please always coordinate any hazardous/special waste with the studio manager."
       },
-
-     trashText: {
-  de: "Bitte Müll trennen: Papiermüll, Verpackungsmüll (Gelb/Plastik) und Restmüll. Sondermüll bitte immer kurz mit dem Studiomeister absprechen.",
-  en: "Please separate waste: paper waste, packaging waste (recycling/plastic) and residual waste. Please always coordinate any hazardous/special waste with the studio manager."
-},
 
       safetyText: {
         de: "Erste-Hilfe-Kasten: im Studio. Feuerlöscher: im Eingang und im Studio. Sammelpunkt: Parkfläche vor dem Haus.",
@@ -517,12 +507,12 @@
         facility: "Facility",
         links: "Quick Links",
         downloads: "Download / Infos",
-        downloadsText: "Factsheet zum Haus.",
+        downloadsText: "Hier kann ein kurzes Factsheet zum Haus abgelegt werden.",
         factSheet: "Fact Sheet",
         feedbackTitle: "Feedback",
         feedbackText: "Wenn etwas hakt: kurzer Ping hilft uns, es sofort zu fixen.",
         feedbackBtn: "Feedback senden",
-        sticky: "Tipp: Alles kopieren → an Team weiterleiten.",
+        sticky: "Tipp: WLAN kopieren → an Team weiterleiten.",
         copyAll: "Alles kopieren",
         mapFail: "Karte konnte nicht geladen werden (Netz/Tracking-Block). Bitte den Button „Google Maps öffnen“ nutzen."
       },
@@ -558,7 +548,7 @@
         feedbackTitle: "Feedback",
         feedbackText: "If anything is off: a quick note helps us fix it immediately.",
         feedbackBtn: "Send feedback",
-        sticky: "Tip: copy all → share with the team.",
+        sticky: "Tip: copy Wi-Fi → share with the team.",
         copyAll: "Copy all",
         mapFail: "Map could not be loaded (network/tracking block). Please use “Open Google Maps”."
       }
@@ -567,7 +557,6 @@
     const $ = (id) => document.getElementById(id);
     let LANG = "de";
 
-    // Theme toggle
     const THEME_KEY = "hangar_welcome_theme";
     function getThemePref(){ return localStorage.getItem(THEME_KEY) || "auto"; }
     function applyThemePref(pref){
@@ -660,10 +649,14 @@
       $("rampTag").textContent = (LANG==="de") ? "Rampe: nach Absprache" : "Ramp: on request";
       $("quietTag").textContent = (LANG==="de") ? "Ruhezeiten beachten" : "Respect quiet hours";
 
-      $("trashPaper").textContent = (LANG==="de") ? "Papier" : "Paper";
-      $("trashYellow").textContent = (LANG==="de") ? "Gelb" : "Recycling";
-      $("trashRest").textContent = (LANG==="de") ? "Rest" : "Residual";
-      $("trashSpecial").textContent = (LANG==="de") ? "Sondermüll → Meldung" : "Hazardous → report";
+      // ✅ These 4 lines are what makes the new trash wording visibly appear in the tags:
+      $("trashPaper").textContent  = (LANG==="de") ? "Papiermüll" : "Paper waste";
+      $("trashYellow").textContent = (LANG==="de") ? "Verpackungsmüll (Gelb/Plastik)" : "Packaging waste (recycling/plastic)";
+      $("trashRest").textContent   = (LANG==="de") ? "Restmüll" : "Residual waste";
+      $("trashSpecial").textContent= (LANG==="de") ? "Sondermüll: bitte ansprechen" : "Hazardous: please ask";
+
+      // ✅ And this line makes the new trash sentence show up in the paragraph:
+      $("trashText").textContent = CONFIG.trashText[LANG];
 
       $("firstAidTag").textContent = (LANG==="de") ? "First Aid: Studio" : "First aid: studio";
       $("extTag").textContent = (LANG==="de") ? "Extinguisher: Eingang/Studio" : "Extinguisher: entrance/studio";
@@ -704,7 +697,6 @@
     }
 
     function init(){
-      // Base content
       const now = new Date();
       $("todayChip").textContent = now.toLocaleDateString("de-DE", { weekday:"long", year:"numeric", month:"2-digit", day:"2-digit" });
 
@@ -725,10 +717,8 @@
       $("mapsBtn").href = CONFIG.mapsQuery;
       $("feedbackBtn").href = CONFIG.feedback.mailto;
 
-      // Factsheet
       $("factsheetBtn").href = CONFIG.downloads.factsheetPdf;
 
-      // Copy actions
       $("copyWifiBtn").addEventListener("click", async () => {
         await copyToClipboard(wifiString());
         $("stickyLeft").textContent = (LANG==="de") ? "WLAN kopiert ✅" : "Wi-Fi copied ✅";
@@ -749,9 +739,11 @@ Mail: ${c.email}
 
 Load-in: ${CONFIG.loadinText[LANG]}
 
+${LANG==="de" ? "Müll" : "Waste"}: ${CONFIG.trashText[LANG]}
+
 ${LANG==="de" ? "Parken" : "Parking"}: ${CONFIG.parkingText[LANG]}
 
-Fact Sheet: ${location.origin ? (location.origin + location.pathname.replace(/\/index\.html?$/,"/") + CONFIG.downloads.factsheetPdf) : CONFIG.downloads.factsheetPdf}
+Fact Sheet: ${CONFIG.downloads.factsheetPdf}
 
 Maps: ${CONFIG.mapsQuery}`;
         await copyToClipboard(text);
@@ -759,20 +751,16 @@ Maps: ${CONFIG.mapsQuery}`;
         setTimeout(() => $("stickyLeft").textContent = I18N[LANG].sticky, 1800);
       });
 
-      // Language
       $("langDeBtn").addEventListener("click", () => setLang("de"));
       $("langEnBtn").addEventListener("click", () => setLang("en"));
 
-      // Theme
       $("themeAutoBtn").addEventListener("click", () => applyThemePref("auto"));
       $("themeLightBtn").addEventListener("click", () => applyThemePref("light"));
       $("themeDarkBtn").addEventListener("click", () => applyThemePref("dark"));
       applyThemePref(getThemePref());
 
-      // Render initial language
       setLang("de");
 
-      // OSM embed
       loadOsmMapForAddress(CONFIG.addressText).catch(() => {
         $("mapFrame").style.display = "none";
         $("mapFallback").style.display = "";
