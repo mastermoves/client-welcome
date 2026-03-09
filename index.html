@@ -4,7 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hangar Studio – Welcome</title>
-  <meta name="theme-color" content="#0a84ff" />
+
+  <!-- IMPORTANT: theme-color must NOT be blue, otherwise Safari/iOS shows blue top chrome -->
+  <meta id="themeColorMeta" name="theme-color" content="#f5f5f7" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
   <style>
     :root{
       --bg:#f5f5f7; --card:#fff; --text:#111; --muted:#6e6e73; --line:#e5e5ea;
@@ -39,18 +44,30 @@
       --shadow2: 0 10px 24px rgba(0,0,0,.35);
     }
 
-    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    /* Ensure pull-to-bounce background is the page color (fixes “blue” on iOS/mac Safari) */
+    html{ background: var(--bg); }
+    body{ background: var(--bg); min-height: 100vh; }
+
+    html,body{
+      margin:0; padding:0;
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
     *{box-sizing:border-box}
     a{color:inherit}
 
-/* iOS notch/statusbar safe-area color */
-.safeTop{
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  height: env(safe-area-inset-top);
-  background: var(--bg);
-}
+    /* Extra safe-area tint (helps on notched iPhones) */
+    .safeTop{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: env(safe-area-inset-top);
+      background: var(--bg);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
     .wrap{max-width: 1100px; margin:0 auto; padding: 18px; padding-bottom: 96px;}
     @media (max-width:600px){ .wrap{padding: 16px;} }
 
@@ -241,7 +258,7 @@
     .stickyLeft{
       color:var(--muted); font-size: 12.5px;
       min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-      max-width: 60%;
+      max-width: 70%;
     }
     .stickyRight{display:flex; gap:10px; flex-shrink:0;}
     @media (max-width: 520px){
@@ -251,8 +268,10 @@
     }
   </style>
 </head>
+
 <body>
   <div class="safeTop" aria-hidden="true"></div>
+
   <div class="wrap">
     <div class="top">
       <div class="brand">
@@ -516,12 +535,12 @@
         facility: "Facility",
         links: "Quick Links",
         downloads: "Download / Infos",
-        downloadsText: "Factsheet zum Haus.",
+        downloadsText: "Factsheet zum Haus:",
         factSheet: "Fact Sheet",
         feedbackTitle: "Feedback",
-        feedbackText: "Wenn etwas hakt: eine kurze Nachricht hilft uns, es sofort zu fixen.",
+        feedbackText: "Wenn etwas hakt, eine kurze Nachricht hilft uns, es sofort zu fixen.",
         feedbackBtn: "Feedback senden",
-        sticky: "Tipp: Alles kopieren → an Team weiterleiten.",
+        sticky: "Tipp: Alles kopieren — an Team weiterleiten.",
         copyAll: "Alles kopieren",
         mapFail: "Karte konnte nicht geladen werden (Netz/Tracking-Block). Bitte den Button „Google Maps öffnen“ nutzen."
       },
@@ -552,12 +571,12 @@
         facility: "Facility",
         links: "Quick links",
         downloads: "Downloads / info",
-        downloadsText: "house fact sheet.",
+        downloadsText: "House fact sheet:",
         factSheet: "Fact Sheet",
         feedbackTitle: "Feedback",
-        feedbackText: "If anything is off: a quick note helps us fix it immediately.",
+        feedbackText: "If something is off, a short message helps us fix it immediately.",
         feedbackBtn: "Send feedback",
-        sticky: "Tip: copy all → share with the team.",
+        sticky: "Tip: Copy all — share with the team.",
         copyAll: "Copy all",
         mapFail: "Map could not be loaded (network/tracking block). Please use “Open Google Maps”."
       }
@@ -575,6 +594,14 @@
       $("themeAutoBtn").classList.toggle("active", pref==="auto");
       $("themeLightBtn").classList.toggle("active", pref==="light");
       $("themeDarkBtn").classList.toggle("active", pref==="dark");
+      syncThemeColor();
+    }
+
+    function syncThemeColor(){
+      // Use current computed background as theme-color so Safari chrome isn't blue.
+      const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#f5f5f7";
+      const meta = document.getElementById("themeColorMeta");
+      if(meta) meta.setAttribute("content", bg);
     }
 
     function copyToClipboard(text){
@@ -658,14 +685,11 @@
       $("rampTag").textContent = (LANG==="de") ? "Rampe: nach Absprache" : "Ramp: on request";
       $("quietTag").textContent = (LANG==="de") ? "Ruhezeiten beachten" : "Respect quiet hours";
 
-      // ✅ These 4 lines are what makes the new trash wording visibly appear in the tags:
+      $("trashText").textContent = CONFIG.trashText[LANG];
       $("trashPaper").textContent  = (LANG==="de") ? "Papiermüll" : "Paper waste";
       $("trashYellow").textContent = (LANG==="de") ? "Verpackungsmüll (Gelb/Plastik)" : "Packaging waste (recycling/plastic)";
       $("trashRest").textContent   = (LANG==="de") ? "Restmüll" : "Residual waste";
       $("trashSpecial").textContent= (LANG==="de") ? "Sondermüll: bitte ansprechen" : "Hazardous: please ask";
-
-      // ✅ And this line makes the new trash sentence show up in the paragraph:
-      $("trashText").textContent = CONFIG.trashText[LANG];
 
       $("firstAidTag").textContent = (LANG==="de") ? "First Aid: Studio" : "First aid: studio";
       $("extTag").textContent = (LANG==="de") ? "Extinguisher: Eingang/Studio" : "Extinguisher: entrance/studio";
@@ -674,6 +698,7 @@
       $("mapFallback").textContent = t.mapFail;
 
       renderRules();
+      syncThemeColor();
     }
 
     async function loadOsmMapForAddress(addressText){
@@ -774,6 +799,12 @@ Maps: ${CONFIG.mapsQuery}`;
         $("mapFrame").style.display = "none";
         $("mapFallback").style.display = "";
       });
+
+      // Keep theme-color correct if system scheme changes while in "Auto"
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => {
+        if(getThemePref() === "auto") syncThemeColor();
+      });
+      syncThemeColor();
     }
 
     init();
