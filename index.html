@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hangar Studio – Welcome</title>
 
-  <!-- IMPORTANT: theme-color must NOT be blue, otherwise Safari/iOS shows blue top chrome -->
   <meta id="themeColorMeta" name="theme-color" content="#f5f5f7" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -44,7 +43,6 @@
       --shadow2: 0 10px 24px rgba(0,0,0,.35);
     }
 
-    /* Ensure pull-to-bounce background is the page color (fixes “blue” on iOS/mac Safari) */
     html{ background: var(--bg); }
     body{ background: var(--bg); min-height: 100vh; }
 
@@ -56,12 +54,9 @@
     *{box-sizing:border-box}
     a{color:inherit}
 
-    /* Extra safe-area tint (helps on notched iPhones) */
     .safeTop{
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: env(safe-area-inset-top);
       background: var(--bg);
       z-index: 9999;
@@ -240,6 +235,42 @@
       box-shadow: var(--shadow2);
     }
 
+    /* Q&A */
+    .qa{display:flex; flex-direction:column; gap:10px;}
+    details.qaItem{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 10px 12px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: var(--shadow2);
+    }
+    details.qaItem summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight: 800;
+      font-size: 14px;
+      line-height:1.25;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    details.qaItem summary::-webkit-details-marker{ display:none; }
+    details.qaItem summary::after{
+      content:"＋";
+      color: var(--muted);
+      font-weight: 900;
+      flex-shrink:0;
+    }
+    details.qaItem[open] summary::after{ content:"–"; }
+    .qaAnswer{
+      margin-top:10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+      white-space: pre-wrap;
+    }
+
     .sticky{
       position:fixed; left:0; right:0; bottom:0;
       background: color-mix(in srgb, var(--card) 92%, transparent);
@@ -282,7 +313,7 @@
           </svg>
         </div>
         <div style="min-width:0;">
-          <h1 id="studioName">Hangar Studio – Welcome / Schön das Ihr da seid!</h1>
+          <h1 id="studioName">Hangar Studio – Welcome</h1>
           <div class="sub" id="welcomeSub"></div>
         </div>
       </div>
@@ -306,7 +337,6 @@
     </div>
 
     <div class="grid">
-      <!-- LEFT -->
       <div class="card">
         <div class="cardPad">
           <div class="cardTitle" id="quickInfoTitle">Quick Info</div>
@@ -363,6 +393,11 @@
               </div>
             </div>
           </div>
+
+          <div class="section">
+            <div class="cardTitle" id="qaTitle">Q&A</div>
+            <div class="qa" id="qaList"></div>
+          </div>
         </div>
 
         <div class="map" aria-label="Karte">
@@ -381,7 +416,6 @@
         </div>
       </div>
 
-      <!-- RIGHT -->
       <div class="card">
         <div class="cardPad">
           <div class="cardTitle" id="parkingTitle">Parken</div>
@@ -421,6 +455,14 @@
                 <p id="downloadsText"></p>
                 <div class="btnRow">
                   <a class="btn" id="factsheetBtn" href="#" role="button" target="_blank" rel="noopener"></a>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 id="printTitle">Druckanfrage</h3>
+                <p id="printText"></p>
+                <div class="btnRow">
+                  <a class="btn primary" id="printBtn" href="#" role="button"></a>
                 </div>
               </div>
 
@@ -498,8 +540,41 @@
         ]
       },
 
-      downloads: {
-        factsheetPdf: "factsheet_hangar_studio.pdf"
+      qa: {
+        de: [
+          {
+            q: "Habt ihr eine Musikanlage?",
+            a:
+`Ja. Bluetooth und AUX.
+Standort: Rackmount in der rechten hinteren Ecke des Studios.
+Pairing: Pairing-Knopf drücken.
+Bluetooth-Name: MZ-123BT_B5E9
+Bei Bedarf kurz den Studiomeister ansprechen.`
+          },
+          { q: "Kann ich Kaffee oder Tee kochen?", a: "Ja. In der Cafeteria stehen Wasserkocher und Filterkaffeemaschine. Wenn die Cafeteria nicht gebucht ist: bitte den Studiomeister ansprechen." },
+          { q: "Wie viel kosten zusätzliche Räume?", a: "Der Studiomeister kann dir jederzeit die aktuelle Preisliste nennen." },
+          { q: "Kann man das Studio heizen?", a: "Ja. Aufgrund der Größe ist das kostenpflichtig und braucht ca. 2 Stunden Aufheizzeit. Bitte den Studiomeister ansprechen." }
+        ],
+        en: [
+          {
+            q: "Do you have a sound system?",
+            a:
+`Yes — Bluetooth and AUX.
+Location: rackmount in the back right corner of the studio.
+Pairing: press the pairing button.
+Bluetooth name: MZ-123BT_B5E9
+If needed, ask the studio manager.`
+          },
+          { q: "Can I make coffee or tea?", a: "Yes. In the cafeteria you’ll find a kettle and a filter coffee machine. If the cafeteria isn’t booked: please ask the studio manager." },
+          { q: "How much are additional rooms?", a: "The studio manager can share the current price list at any time." },
+          { q: "Can the studio be heated?", a: "Yes. Due to the room size this comes with additional costs and needs about 2 hours to heat up. Please ask the studio manager." }
+        ]
+      },
+
+      downloads: { factsheetPdf: "factsheet_hangar_studio.pdf" },
+
+      printRequest: {
+        mailto: "mailto:drucken@hanger.de?subject=Print%20Request%20(Hangar%20Studio)&body=Hi%20Team%2C%0A%0AI%27d%20like%20to%20print%20the%20following%3A%0A%0A-%20%0A%0AFile%20/Link%3A%20%0A%0AThanks!"
       },
 
       feedback: {
@@ -523,6 +598,7 @@
         delivery: "Anlieferung & Transport",
         loadin: "Load-in",
         trash: "Müll & Entsorgung",
+        qa: "Q&A",
         map: "Karte (OpenStreetMap)",
         openGmaps: "Google Maps öffnen",
         parkingTitle: "Parken",
@@ -537,6 +613,9 @@
         downloads: "Download / Infos",
         downloadsText: "Factsheet zum Haus:",
         factSheet: "Fact Sheet",
+        printTitle: "Druckanfrage",
+        printText: "Du willst etwas drucken? Kein Problem. Druck wird nach Aufwand berechnet.",
+        printBtn: "Drucken",
         feedbackTitle: "Feedback",
         feedbackText: "Wenn etwas hakt, eine kurze Nachricht hilft uns, es sofort zu fixen.",
         feedbackBtn: "Feedback senden",
@@ -559,6 +638,7 @@
         delivery: "Delivery & transport",
         loadin: "Load-in",
         trash: "Waste",
+        qa: "Q&A",
         map: "Map (OpenStreetMap)",
         openGmaps: "Open Google Maps",
         parkingTitle: "Parking",
@@ -573,6 +653,9 @@
         downloads: "Downloads / info",
         downloadsText: "House fact sheet:",
         factSheet: "Fact Sheet",
+        printTitle: "Print request",
+        printText: "Need something printed? No problem. Printing is billed based on effort.",
+        printBtn: "Print",
         feedbackTitle: "Feedback",
         feedbackText: "If something is off, a short message helps us fix it immediately.",
         feedbackBtn: "Send feedback",
@@ -598,7 +681,6 @@
     }
 
     function syncThemeColor(){
-      // Use current computed background as theme-color so Safari chrome isn't blue.
       const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || "#f5f5f7";
       const meta = document.getElementById("themeColorMeta");
       if(meta) meta.setAttribute("content", bg);
@@ -635,6 +717,20 @@
       });
     }
 
+    function renderQA(){
+      const host = $("qaList");
+      host.innerHTML = "";
+      CONFIG.qa[LANG].forEach(entry => {
+        const d = document.createElement("details");
+        d.className = "qaItem";
+        d.innerHTML = `
+          <summary>${entry.q}</summary>
+          <div class="qaAnswer">${entry.a}</div>
+        `;
+        host.appendChild(d);
+      });
+    }
+
     function renderAll(){
       const t = I18N[LANG];
 
@@ -652,6 +748,8 @@
       $("deliveryTitle").textContent = t.delivery;
       $("loadinTitle").textContent = t.loadin;
       $("trashTitle").textContent = t.trash;
+
+      $("qaTitle").textContent = t.qa;
 
       $("mapHint").textContent = t.map;
       $("mapsBtn").textContent = t.openGmaps;
@@ -672,6 +770,10 @@
       $("downloadsTitle").textContent = t.downloads;
       $("downloadsText").textContent = t.downloadsText;
       $("factsheetBtn").textContent = t.factSheet;
+
+      $("printTitle").textContent = t.printTitle;
+      $("printText").textContent = t.printText;
+      $("printBtn").textContent = t.printBtn;
 
       $("feedbackTitle").textContent = t.feedbackTitle;
       $("feedbackText").textContent = t.feedbackText;
@@ -698,6 +800,7 @@
       $("mapFallback").textContent = t.mapFail;
 
       renderRules();
+      renderQA();
       syncThemeColor();
     }
 
@@ -752,6 +855,7 @@
       $("feedbackBtn").href = CONFIG.feedback.mailto;
 
       $("factsheetBtn").href = CONFIG.downloads.factsheetPdf;
+      $("printBtn").href = CONFIG.printRequest.mailto;
 
       $("copyWifiBtn").addEventListener("click", async () => {
         await copyToClipboard(wifiString());
@@ -779,7 +883,9 @@ ${LANG==="de" ? "Parken" : "Parking"}: ${CONFIG.parkingText[LANG]}
 
 Fact Sheet: ${CONFIG.downloads.factsheetPdf}
 
-Maps: ${CONFIG.mapsQuery}`;
+Google Maps: ${CONFIG.mapsQuery}
+
+Print: drucken@hanger.de (billed by effort)`;
         await copyToClipboard(text);
         $("stickyLeft").textContent = (LANG==="de") ? "Alles kopiert ✅" : "Copied ✅";
         setTimeout(() => $("stickyLeft").textContent = I18N[LANG].sticky, 1800);
@@ -800,7 +906,6 @@ Maps: ${CONFIG.mapsQuery}`;
         $("mapFallback").style.display = "";
       });
 
-      // Keep theme-color correct if system scheme changes while in "Auto"
       window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => {
         if(getThemePref() === "auto") syncThemeColor();
       });
