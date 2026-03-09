@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hangar Studio – Welcome</title>
+  <meta name="theme-color" content="#0a84ff" />
+  <style>
+    :root{
+      --bg:#f5f5f7; --card:#fff; --text:#111; --muted:#6e6e73; --line:#e5e5ea;
+      --accent:#0a84ff; --accent2: rgba(10,132,255,.12);
+      --shadow: 0 14px 32px rgba(0,0,0,.10);
+      --shadow2: 0 8px 18px rgba(0,0,0,.08);
+      --radius: 18px; --radius2: 14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+      --pad: 16px;
+      --gap: 14px;
+      --sectionGap: 18px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0f14; --card: rgba(17,24,38,.92); --text:#e6edf3; --muted:#9aa4b2; --line:#233044;
+        --accent:#4f8cff; --accent2: rgba(79,140,255,.18);
+        --shadow: 0 18px 40px rgba(0,0,0,.45);
+        --shadow2: 0 10px 24px rgba(0,0,0,.35);
+      }
+    }
+    html[data-theme="light"]{
+      --bg:#f5f5f7; --card:#fff; --text:#111; --muted:#6e6e73; --line:#e5e5ea;
+      --accent:#0a84ff; --accent2: rgba(10,132,255,.12);
+      --shadow: 0 14px 32px rgba(0,0,0,.10);
+      --shadow2: 0 8px 18px rgba(0,0,0,.08);
+    }
+    html[data-theme="dark"]{
+      --bg:#0b0f14; --card: rgba(17,24,38,.92); --text:#e6edf3; --muted:#9aa4b2; --line:#233044;
+      --accent:#4f8cff; --accent2: rgba(79,140,255,.18);
+      --shadow: 0 18px 40px rgba(0,0,0,.45);
+      --shadow2: 0 10px 24px rgba(0,0,0,.35);
+    }
+
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    *{box-sizing:border-box}
+    a{color:inherit}
+
+    .wrap{max-width: 1100px; margin:0 auto; padding: 18px; padding-bottom: 96px;}
+    @media (max-width:600px){ .wrap{padding: 16px;} }
+
+    .top{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom: var(--gap);}
+    .brand{display:flex; gap:12px; align-items:flex-start; min-width:0;}
+    .logo{
+      width:44px; height:44px; border-radius: 14px;
+      background: color-mix(in srgb, var(--accent2) 70%, var(--card));
+      border:1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+      box-shadow: var(--shadow2);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+      margin-top: 2px;
+    }
+    .logo svg{width:24px; height:24px}
+    h1{margin:0; font-size: 18px; letter-spacing:.2px; line-height:1.2}
+    .sub{margin-top:8px; color:var(--muted); font-size: 13px; line-height:1.45; max-width: 72ch}
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; align-items:center;}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: var(--shadow2);
+      white-space: nowrap;
+    }
+    .dot{width:8px; height:8px; border-radius:999px; background: var(--accent); display:inline-block}
+
+    .seg{
+      display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden;
+      background: color-mix(in srgb, var(--card) 92%, transparent); box-shadow: var(--shadow2);
+    }
+    .seg button{
+      border:0; background:transparent; padding:8px 10px; cursor:pointer;
+      font-weight:800; font-size:12px; color:var(--muted);
+      min-width: 54px;
+    }
+    .seg button.active{
+      background: color-mix(in srgb, var(--accent2) 65%, var(--card));
+      color: var(--text);
+    }
+
+    .grid{display:grid; grid-template-columns: 1.3fr .7fr; gap: var(--gap); align-items:start;}
+    @media (max-width: 980px){ .grid{grid-template-columns: 1fr;} }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardPad{padding: var(--pad);}
+
+    .cardTitle{
+      font-size: 13px;
+      letter-spacing:.2px;
+      color: var(--muted);
+      margin: 0 0 12px;
+      line-height:1.25;
+    }
+
+    .row{display:grid; grid-template-columns: 1fr 1fr; gap: 10px;}
+    @media (max-width: 720px){ .row{grid-template-columns:1fr;} }
+
+    .kv{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 12px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: var(--shadow2);
+    }
+    .k{font-size:12px; color:var(--muted); line-height:1.2}
+    .v{margin-top:8px; font-weight:800; line-height:1.25}
+    .mono{font-family: var(--mono); font-weight:700}
+
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .btn{
+      border:1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 800;
+      box-shadow: var(--shadow2);
+      font-size: 13px;
+      white-space: nowrap;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 40px;
+    }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      background: color-mix(in srgb, var(--accent2) 65%, var(--card));
+    }
+    .btn:active{transform: translateY(1px);}
+
+    .section{
+      margin-top: var(--sectionGap);
+      padding-top: var(--sectionGap);
+      border-top: 1px solid var(--line);
+    }
+
+    .list{display:flex; flex-direction:column; gap:10px;}
+    .item{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding: 12px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: var(--shadow2);
+    }
+    .item h3{margin:0; font-size: 14px; line-height:1.25}
+    .item p{margin:10px 0 0; color:var(--muted); font-size: 13px; line-height:1.45;}
+    .tagRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+    }
+
+    /* Map block */
+    .map{border-top: 1px solid var(--line); background: color-mix(in srgb, var(--card) 92%, transparent); padding: var(--pad);}
+    .mapTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.35;
+    }
+    .mapBadges{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
+    .mapBadge{
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border-radius: 999px;
+      padding: 6px 10px;
+      box-shadow: var(--shadow2);
+      white-space: nowrap;
+      text-decoration:none;
+      cursor:pointer;
+      font-weight: 750;
+      color: var(--text);
+    }
+    .mapFrame{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      background: #fff;
+    }
+    .mapFrame iframe{width:100%; height: 420px; border:0; display:block;}
+    @media (max-width:720px){ .mapFrame iframe{height: 360px;} }
+
+    .mapFallback{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      box-shadow: var(--shadow2);
+    }
+
+    /* Sticky */
+    .sticky{
+      position:fixed; left:0; right:0; bottom:0;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      z-index: 40;
+      padding: 10px 14px;
+      display:flex;
+      justify-content:center;
+    }
+    .stickyInner{
+      width: min(1100px, 100%);
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      min-width:0;
+    }
+    .stickyLeft{
+      color:var(--muted); font-size: 12.5px;
+      min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+      max-width: 60%;
+    }
+    .stickyRight{display:flex; gap:10px; flex-shrink:0;}
+    @media (max-width: 520px){
+      .stickyLeft{display:none;}
+      .stickyRight{width:100%;}
+      .stickyRight .btn{flex:1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M7 17V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 9h4M10 12h4M10 15h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="min-width:0;">
+          <h1 id="studioName">Hangar Studio – Welcome</h1>
+          <div class="sub" id="welcomeSub">Alles Wichtige für euren Dreh: WLAN, Ansprechpartner, Anlieferung, Parken, Hausregeln und Karte – kompakt auf einem Screen.</div>
+        </div>
+      </div>
+
+      <div class="chips">
+        <div class="chip"><span class="dot"></span><span id="todayChip">Heute</span></div>
+        <div class="chip"><span id="emergencyLabel">Notfall</span>: <b id="emergencyPhone">112</b></div>
+        <div class="chip"><span id="addressChip"></span></div>
+
+        <!-- Language toggle -->
+        <div class="seg" aria-label="Language">
+          <button id="langDeBtn" class="active" type="button">DE</button>
+          <button id="langEnBtn" type="button">EN</button>
+        </div>
+
+        <!-- Theme toggle -->
+        <div class="seg" aria-label="Theme">
+          <button id="themeAutoBtn" class="active" type="button">Auto</button>
+          <button id="themeLightBtn" type="button">Light</button>
+          <button id="themeDarkBtn" type="button">Dark</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="cardPad">
+          <div class="cardTitle" id="quickInfoTitle">Quick Info</div>
+
+          <div class="row">
+            <div class="kv">
+              <div class="k" id="wifiTitle">WLAN</div>
+              <div class="v mono" id="wifiSsid">HANGAR_GUEST</div>
+              <div class="k" style="margin-top:10px;" id="wifiPassLabel">Passwort</div>
+              <div class="v mono" id="wifiPass">hangar-2026</div>
+              <div class="btnRow">
+                <button class="btn primary" id="copyWifiBtn" type="button">WLAN kopieren</button>
+              </div>
+            </div>
+
+            <div class="kv">
+              <div class="k" id="contactTitle">Ansprechpartner</div>
+              <div class="v" id="contactName">Studiomeister</div>
+              <div class="k" style="margin-top:10px;" id="phoneLabel">Telefon</div>
+              <div class="v mono" id="contactPhone">+49 30 000000</div>
+              <div class="btnRow">
+                <a class="btn primary" id="callBtn" href="#" role="button">Anrufen</a>
+                <a class="btn" id="mailBtn" href="#" role="button">E-Mail</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="cardTitle" id="rulesTitle">Hausregeln (Kurzfassung)</div>
+            <div class="list" id="rulesList"></div>
+          </div>
+
+          <div class="section">
+            <div class="cardTitle" id="deliveryTitle">Anlieferung & Transport</div>
+            <div class="list">
+              <div class="item">
+                <h3 id="loadinTitle">Load-in</h3>
+                <p id="loadinText"></p>
+                <div class="tagRow">
+                  <span class="tag" id="accessTag"></span>
+                  <span class="tag" id="rampTag">Rampe: nach Absprache</span>
+                  <span class="tag" id="quietTag">Ruhezeiten beachten</span>
+                </div>
+              </div>
+              <div class="item">
+                <h3 id="trashTitle">Müll & Entsorgung</h3>
+                <p id="trashText"></p>
+                <div class="tagRow">
+                  <span class="tag" id="trashPaper">Papier</span>
+                  <span class="tag" id="trashYellow">Gelb</span>
+                  <span class="tag" id="trashRest">Rest</span>
+                  <span class="tag" id="trashSpecial">Sondermüll → Meldung</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OSM map -->
+        <div class="map" aria-label="Karte">
+          <div class="mapTop">
+            <div class="mapBadge" id="mapHint">Karte (OpenStreetMap)</div>
+            <div class="mapBadges">
+              <a class="mapBadge" id="mapsBtn" href="#" role="button">Google Maps öffnen</a>
+            </div>
+          </div>
+
+          <div class="mapFrame" id="mapFrame" style="display:none;">
+            <iframe id="osmIframe" title="OpenStreetMap"></iframe>
+          </div>
+
+          <div class="mapFallback" id="mapFallback">
+            Karte konnte nicht geladen werden (Netz/Tracking-Block). Bitte den Button „Google Maps öffnen“ nutzen.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+        <div class="cardPad">
+          <div class="cardTitle" id="parkingTitle">Parken</div>
+          <div class="item">
+            <h3 id="parkingHeadline">Parkfläche</h3>
+            <p id="parkingText"></p>
+          </div>
+
+          <div class="section">
+            <div class="cardTitle" id="safetyTitle">Sicherheit</div>
+            <div class="list">
+              <div class="item">
+                <h3 id="firstAidTitle">Erste Hilfe & Sammelpunkt</h3>
+                <p id="safetyText"></p>
+                <div class="tagRow">
+                  <span class="tag" id="firstAidTag">First Aid: Studio</span>
+                  <span class="tag" id="extTag">Extinguisher: Eingang/Studio</span>
+                  <span class="tag" id="assemblyTag">Assembly: Parkfläche vor dem Haus</span>
+                </div>
+              </div>
+              <div class="item">
+                <h3 id="numbersTitle">Wichtige Nummern</h3>
+                <p style="margin-top:10px;">
+                  <span id="emergencyInlineLabel">Notruf</span>: <b class="mono">112</b><br/>
+                  <span id="studioLabel">Studio</span>: <b class="mono" id="studioPhoneInline"></b><br/>
+                  <span id="facilityLabel">Facility</span>: <b class="mono" id="facilityPhoneInline"></b>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="cardTitle" id="linksTitle">Quick Links</div>
+            <div class="list">
+              <div class="item">
+                <h3 id="downloadsTitle">Download / Infos</h3>
+                <p id="downloadsText">Optional: PDF-Hausregeln, Stromplan, Ansprechpartnerliste.</p>
+                <div class="btnRow">
+                  <a class="btn" id="rulesPdfBtn" href="#" role="button">Hausregeln PDF</a>
+                  <a class="btn" id="powerPdfBtn" href="#" role="button">Stromplan</a>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 id="feedbackTitle">Feedback</h3>
+                <p id="feedbackText">Wenn etwas hakt: kurzer Ping hilft uns, es sofort zu fixen.</p>
+                <div class="btnRow">
+                  <a class="btn primary" id="feedbackBtn" href="#" role="button">Feedback senden</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky">
+    <div class="stickyInner">
+      <div class="stickyLeft" id="stickyLeft">Tipp: WLAN kopieren → an Team weiterleiten.</div>
+      <div class="stickyRight">
+        <button class="btn" id="copyAllBtn" type="button">Alles kopieren</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      studioName: "Hangar Studio",
+      addressText: "Ludwig-Boltzmann-Straße 1, 12489 Berlin (Adlershof)",
+      mapsQuery: "https://maps.google.com/?q=" + encodeURIComponent("Ludwig-Boltzmann-Straße 1, 12489 Berlin"),
+
+      wifi: { ssid: "HANGAR_GUEST", pass: "hangar-2026" },
+
+      contacts: {
+        studio:   { name: "Studiomeister", phone: "+49 30 000000", email: "studio@hangar.example" },
+        facility: { name: "Facility",      phone: "+49 30 000001", email: "facility@hangar.example" }
+      },
+
+      parkingText: {
+        de: "Bitte die Parkfläche vor dem Haus nutzen. LKW können nach Absprache ins Studio reinfahren – bitte den Studiomeister ansprechen.",
+        en: "Please use the parking area in front of the building. Trucks can drive into the studio by arrangement — please speak to the studio manager."
+      },
+
+      loadinText: {
+        de: "Bitte ruf uns ca. 15 Minuten vor eurer Ankunft an, damit wir die Anlieferung koordinieren können. Zufahrt über die Parkfläche vor dem Haus.",
+        en: "Please call about 15 minutes before arrival so we can coordinate the load-in. Access is via the parking area in front of the building."
+      },
+
+      accessTag: {
+        de: "Zufahrt: Parkfläche vor dem Haus",
+        en: "Access: parking area in front"
+      },
+
+      trashText: {
+        de: "Bitte Müll trennen (Papier / Gelb / Rest). Große Mengen (Bau/Sets) vorher ankündigen – Container kann gestellt werden.",
+        en: "Please separate waste (paper / recycling / residual). Large amounts (build/sets) must be announced in advance — a container can be arranged."
+      },
+
+      safetyText: {
+        de: "Erste-Hilfe-Kasten: im Studio. Feuerlöscher: im Eingang und im Studio. Sammelpunkt: Parkfläche vor dem Haus.",
+        en: "First aid kit: in the studio. Fire extinguishers: at the entrance and in the studio. Assembly point: parking area in front of the building."
+      },
+
+      rules: {
+        de: [
+          { title: "Besenrein", body: "Am Wrap bitte grob besenrein, Tape-Reste abziehen, Müll trennen." },
+          { title: "Rauchverbot", body: "Innenbereiche sind rauchfrei. Rauchen nur in der ausgewiesenen Zone." },
+          { title: "Lautstärke", body: "Bitte Ruhezeiten beachten (insb. vor 8:00 / nach 22:00)." },
+          { title: "Strom & Rigging", body: "Rigging/Power nur nach Einweisung. Bei Fragen: Studiomeister." },
+          { title: "Zutritt & Sicherheit", body: "Tore/Türen nicht offen stehen lassen. Unbekannte Personen bitte ansprechen." }
+        ],
+        en: [
+          { title: "Leave it tidy", body: "At wrap please leave the stage reasonably clean, remove tape, and separate waste." },
+          { title: "No smoking", body: "Indoor areas are non-smoking. Smoking only in the designated area." },
+          { title: "Noise", body: "Please respect quiet hours (especially before 08:00 / after 22:00)." },
+          { title: "Power & rigging", body: "Rigging/power only after briefing. Questions: studio manager." },
+          { title: "Access & safety", body: "Do not leave gates/doors open. Please approach unknown persons." }
+        ]
+      },
+
+      downloads: { rulesPdf: "", powerPdf: "" },
+      feedback: { mailto: "mailto:studio@hangar.example?subject=Hangar%20Studio%20Feedback&body=Hi%20Team%2C%0A%0AFeedback%3A%20" }
+    };
+
+    const I18N = {
+      de: {
+        sub: "Alles Wichtige für euren Dreh: WLAN, Ansprechpartner, Anlieferung, Parken, Hausregeln und Karte – kompakt auf einem Screen.",
+        emergency: "Notfall",
+        quick: "Quick Info",
+        wifi: "WLAN",
+        pass: "Passwort",
+        copyWifi: "WLAN kopieren",
+        contact: "Ansprechpartner",
+        phone: "Telefon",
+        call: "Anrufen",
+        mail: "E-Mail",
+        rules: "Hausregeln (Kurzfassung)",
+        delivery: "Anlieferung & Transport",
+        loadin: "Load-in",
+        trash: "Müll & Entsorgung",
+        map: "Karte (OpenStreetMap)",
+        openGmaps: "Google Maps öffnen",
+        parkingTitle: "Parken",
+        parkingHeadline: "Parkfläche",
+        safety: "Sicherheit",
+        firstAid: "Erste Hilfe & Sammelpunkt",
+        numbers: "Wichtige Nummern",
+        emergencyInline: "Notruf",
+        studio: "Studio",
+        facility: "Facility",
+        links: "Quick Links",
+        downloads: "Download / Infos",
+        downloadsText: "Optional: PDF-Hausregeln, Stromplan, Ansprechpartnerliste.",
+        rulesPdf: "Hausregeln PDF",
+        powerPdf: "Stromplan",
+        feedbackTitle: "Feedback",
+        feedbackText: "Wenn etwas hakt: kurzer Ping hilft uns, es sofort zu fixen.",
+        feedbackBtn: "Feedback senden",
+        sticky: "Tipp: WLAN kopieren → an Team weiterleiten.",
+        copyAll: "Alles kopieren",
+        mapFail: "Karte konnte nicht geladen werden (Netz/Tracking-Block). Bitte den Button „Google Maps öffnen“ nutzen."
+      },
+      en: {
+        sub: "Everything you need on set: Wi-Fi, contacts, delivery, parking, house rules and map — on one screen.",
+        emergency: "Emergency",
+        quick: "Quick info",
+        wifi: "Wi-Fi",
+        pass: "Password",
+        copyWifi: "Copy Wi-Fi",
+        contact: "Contact",
+        phone: "Phone",
+        call: "Call",
+        mail: "Email",
+        rules: "House rules (short)",
+        delivery: "Delivery & transport",
+        loadin: "Load-in",
+        trash: "Waste",
+        map: "Map (OpenStreetMap)",
+        openGmaps: "Open Google Maps",
+        parkingTitle: "Parking",
+        parkingHeadline: "Parking area",
+        safety: "Safety",
+        firstAid: "First aid & assembly point",
+        numbers: "Important numbers",
+        emergencyInline: "Emergency",
+        studio: "Studio",
+        facility: "Facility",
+        links: "Quick links",
+        downloads: "Downloads / info",
+        downloadsText: "Optional: house rules PDF, power plan, contact list.",
+        rulesPdf: "House rules PDF",
+        powerPdf: "Power plan",
+        feedbackTitle: "Feedback",
+        feedbackText: "If anything is off: a quick note helps us fix it immediately.",
+        feedbackBtn: "Send feedback",
+        sticky: "Tip: copy Wi-Fi → share with the team.",
+        copyAll: "Copy all",
+        mapFail: "Map could not be loaded (network/tracking block). Please use “Open Google Maps”."
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+    let LANG = "de";
+
+    // Theme toggle
+    const THEME_KEY = "hangar_welcome_theme";
+    function getThemePref(){ return localStorage.getItem(THEME_KEY) || "auto"; }
+    function applyThemePref(pref){
+      if(pref === "auto") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", pref);
+      localStorage.setItem(THEME_KEY, pref);
+      $("themeAutoBtn").classList.toggle("active", pref==="auto");
+      $("themeLightBtn").classList.toggle("active", pref==="light");
+      $("themeDarkBtn").classList.toggle("active", pref==="dark");
+    }
+
+    function copyToClipboard(text){
+      if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+      const ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand("copy"); ta.remove();
+      return Promise.resolve();
+    }
+
+    function wifiString(){
+      return `${I18N[LANG].wifi}: ${CONFIG.wifi.ssid}\n${I18N[LANG].pass}: ${CONFIG.wifi.pass}`;
+    }
+
+    function setLang(lang){
+      LANG = lang;
+      document.documentElement.lang = lang;
+      $("langDeBtn").classList.toggle("active", lang==="de");
+      $("langEnBtn").classList.toggle("active", lang==="en");
+      renderAll();
+    }
+
+    function renderRules(){
+      const host = $("rulesList");
+      host.innerHTML = "";
+      CONFIG.rules[LANG].forEach(r => {
+        const d = document.createElement("div");
+        d.className = "item";
+        d.innerHTML = `<h3>${r.title}</h3><p>${r.body}</p>`;
+        host.appendChild(d);
+      });
+    }
+
+    function renderAll(){
+      const t = I18N[LANG];
+      $("welcomeSub").textContent = t.sub;
+      $("emergencyLabel").textContent = t.emergency;
+      $("quickInfoTitle").textContent = t.quick;
+      $("wifiTitle").textContent = t.wifi;
+      $("wifiPassLabel").textContent = t.pass;
+      $("copyWifiBtn").textContent = t.copyWifi;
+      $("contactTitle").textContent = t.contact;
+      $("phoneLabel").textContent = t.phone;
+      $("callBtn").textContent = t.call;
+      $("mailBtn").textContent = t.mail;
+      $("rulesTitle").textContent = t.rules;
+      $("deliveryTitle").textContent = t.delivery;
+      $("loadinTitle").textContent = t.loadin;
+      $("trashTitle").textContent = t.trash;
+      $("mapHint").textContent = t.map;
+      $("mapsBtn").textContent = t.openGmaps;
+
+      $("parkingTitle").textContent = t.parkingTitle;
+      $("parkingHeadline").textContent = t.parkingHeadline;
+      $("safetyTitle").textContent = t.safety;
+      $("firstAidTitle").textContent = t.firstAid;
+      $("numbersTitle").textContent = t.numbers;
+      $("emergencyInlineLabel").textContent = t.emergencyInline;
+      $("studioLabel").textContent = t.studio;
+      $("facilityLabel").textContent = t.facility;
+
+      $("linksTitle").textContent = t.links;
+      $("downloadsTitle").textContent = t.downloads;
+      $("downloadsText").textContent = t.downloadsText;
+      $("rulesPdfBtn").textContent = t.rulesPdf;
+      $("powerPdfBtn").textContent = t.powerPdf;
+      $("feedbackTitle").textContent = t.feedbackTitle;
+      $("feedbackText").textContent = t.feedbackText;
+      $("feedbackBtn").textContent = t.feedbackBtn;
+
+      $("stickyLeft").textContent = t.sticky;
+      $("copyAllBtn").textContent = t.copyAll;
+
+      $("parkingText").textContent = CONFIG.parkingText[LANG];
+      $("loadinText").textContent = CONFIG.loadinText[LANG];
+      $("accessTag").textContent = CONFIG.accessTag[LANG];
+      $("trashText").textContent = CONFIG.trashText[LANG];
+      $("safetyText").textContent = CONFIG.safetyText[LANG];
+
+      $("firstAidTag").textContent = (LANG==="de") ? "First Aid: Studio" : "First aid: studio";
+      $("extTag").textContent = (LANG==="de") ? "Extinguisher: Eingang/Studio" : "Extinguisher: entrance/studio";
+      $("assemblyTag").textContent = (LANG==="de") ? "Assembly: Parkfläche vor dem Haus" : "Assembly: parking area in front";
+
+      $("mapFallback").textContent = t.mapFail;
+
+      renderRules();
+    }
+
+    async function loadOsmMapForAddress(addressText){
+      const url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(addressText);
+      const res = await fetch(url, { headers: { "Accept": "application/json" } });
+      if(!res.ok) throw new Error("Geocode failed");
+      const data = await res.json();
+      if(!data || !data[0]) throw new Error("No result");
+
+      const lat = parseFloat(data[0].lat);
+      const lon = parseFloat(data[0].lon);
+      if(!isFinite(lat) || !isFinite(lon)) throw new Error("Bad coords");
+
+      const deltaLon = 0.01;
+      const deltaLat = 0.006;
+      const left = lon - deltaLon;
+      const right = lon + deltaLon;
+      const top = lat + deltaLat;
+      const bottom = lat - deltaLat;
+
+      const src =
+        "https://www.openstreetmap.org/export/embed.html" +
+        "?bbox=" + encodeURIComponent(`${left},${bottom},${right},${top}`) +
+        "&layer=mapnik" +
+        "&marker=" + encodeURIComponent(`${lat},${lon}`);
+
+      $("osmIframe").src = src;
+      $("mapFrame").style.display = "";
+      $("mapFallback").style.display = "none";
+    }
+
+    function init(){
+      const now = new Date();
+      $("todayChip").textContent = now.toLocaleDateString("de-DE", { weekday:"long", year:"numeric", month:"2-digit", day:"2-digit" });
+
+      $("studioName").textContent = `${CONFIG.studioName} – Welcome`;
+      $("addressChip").textContent = CONFIG.addressText;
+
+      $("wifiSsid").textContent = CONFIG.wifi.ssid;
+      $("wifiPass").textContent = CONFIG.wifi.pass;
+
+      $("contactName").textContent = CONFIG.contacts.studio.name;
+      $("contactPhone").textContent = CONFIG.contacts.studio.phone;
+      $("studioPhoneInline").textContent = CONFIG.contacts.studio.phone;
+      $("facilityPhoneInline").textContent = CONFIG.contacts.facility.phone;
+
+      $("callBtn").href = `tel:${CONFIG.contacts.studio.phone.replace(/\s/g,"")}`;
+      $("mailBtn").href = `mailto:${CONFIG.contacts.studio.email}`;
+
+      $("mapsBtn").href = CONFIG.mapsQuery;
+      $("feedbackBtn").href = CONFIG.feedback.mailto;
+
+      const rulesPdf = $("rulesPdfBtn");
+      const powerPdf = $("powerPdfBtn");
+      if (CONFIG.downloads.rulesPdf){ rulesPdf.href = CONFIG.downloads.rulesPdf; rulesPdf.style.display="inline-flex"; }
+      else { rulesPdf.style.display="none"; }
+      if (CONFIG.downloads.powerPdf){ powerPdf.href = CONFIG.downloads.powerPdf; powerPdf.style.display="inline-flex"; }
+      else { powerPdf.style.display="none"; }
+
+      $("copyWifiBtn").addEventListener("click", async () => {
+        await copyToClipboard(wifiString());
+        $("stickyLeft").textContent = (LANG==="de") ? "WLAN kopiert ✅" : "Wi-Fi copied ✅";
+        setTimeout(() => $("stickyLeft").textContent = I18N[LANG].sticky, 1600);
+      });
+
+      $("copyAllBtn").addEventListener("click", async () => {
+        const c = CONFIG.contacts.studio;
+        const text =
+`${CONFIG.studioName.toUpperCase()} – INFO
+${LANG==="de" ? "Adresse" : "Address"}: ${CONFIG.addressText}
+
+${wifiString()}
+
+${LANG==="de" ? "Ansprechpartner" : "Contact"}: ${c.name}
+${LANG==="de" ? "Telefon" : "Phone"}: ${c.phone}
+Mail: ${c.email}
+
+Load-in: ${CONFIG.loadinText[LANG]}
+
+${LANG==="de" ? "Parken" : "Parking"}: ${CONFIG.parkingText[LANG]}
+
+Maps: ${CONFIG.mapsQuery}`;
+        await copyToClipboard(text);
+        $("stickyLeft").textContent = (LANG==="de") ? "Alles kopiert ✅" : "Copied ✅";
+        setTimeout(() => $("stickyLeft").textContent = I18N[LANG].sticky, 1800);
+      });
+
+      $("langDeBtn").addEventListener("click", () => setLang("de"));
+      $("langEnBtn").addEventListener("click", () => setLang("en"));
+
+      $("themeAutoBtn").addEventListener("click", () => applyThemePref("auto"));
+      $("themeLightBtn").addEventListener("click", () => applyThemePref("light"));
+      $("themeDarkBtn").addEventListener("click", () => applyThemePref("dark"));
+      applyThemePref(getThemePref());
+
+      setLang("de");
+
+      loadOsmMapForAddress(CONFIG.addressText).catch(() => {
+        $("mapFrame").style.display = "none";
+        $("mapFallback").style.display = "";
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
