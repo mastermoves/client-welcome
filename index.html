@@ -257,7 +257,7 @@
         </div>
         <div style="min-width:0;">
           <h1 id="studioName">Hangar Studio – Welcome</h1>
-          <div class="sub" id="welcomeSub">Alles Wichtige für euren Dreh: WLAN, Ansprechpartner, Anlieferung, Parken, Hausregeln und Karte – kompakt auf einem Screen.</div>
+          <div class="sub" id="welcomeSub"></div>
         </div>
       </div>
 
@@ -290,22 +290,22 @@
           <div class="row">
             <div class="kv">
               <div class="k" id="wifiTitle">WLAN</div>
-              <div class="v mono" id="wifiSsid">HANGAR_GUEST</div>
+              <div class="v mono" id="wifiSsid"></div>
               <div class="k" style="margin-top:10px;" id="wifiPassLabel">Passwort</div>
-              <div class="v mono" id="wifiPass">hangar-2026</div>
+              <div class="v mono" id="wifiPass"></div>
               <div class="btnRow">
-                <button class="btn primary" id="copyWifiBtn" type="button">WLAN kopieren</button>
+                <button class="btn primary" id="copyWifiBtn" type="button"></button>
               </div>
             </div>
 
             <div class="kv">
               <div class="k" id="contactTitle">Ansprechpartner</div>
-              <div class="v" id="contactName">Studiomeister</div>
+              <div class="v" id="contactName"></div>
               <div class="k" style="margin-top:10px;" id="phoneLabel">Telefon</div>
-              <div class="v mono" id="contactPhone">+49 30 000000</div>
+              <div class="v mono" id="contactPhone"></div>
               <div class="btnRow">
-                <a class="btn primary" id="callBtn" href="#" role="button">Anrufen</a>
-                <a class="btn" id="mailBtn" href="#" role="button">E-Mail</a>
+                <a class="btn primary" id="callBtn" href="#" role="button"></a>
+                <a class="btn" id="mailBtn" href="#" role="button"></a>
               </div>
             </div>
           </div>
@@ -323,18 +323,18 @@
                 <p id="loadinText"></p>
                 <div class="tagRow">
                   <span class="tag" id="accessTag"></span>
-                  <span class="tag" id="rampTag">Rampe: nach Absprache</span>
-                  <span class="tag" id="quietTag">Ruhezeiten beachten</span>
+                  <span class="tag" id="rampTag"></span>
+                  <span class="tag" id="quietTag"></span>
                 </div>
               </div>
               <div class="item">
                 <h3 id="trashTitle">Müll & Entsorgung</h3>
                 <p id="trashText"></p>
                 <div class="tagRow">
-                  <span class="tag" id="trashPaper">Papier</span>
-                  <span class="tag" id="trashYellow">Gelb</span>
-                  <span class="tag" id="trashRest">Rest</span>
-                  <span class="tag" id="trashSpecial">Sondermüll → Meldung</span>
+                  <span class="tag" id="trashPaper"></span>
+                  <span class="tag" id="trashYellow"></span>
+                  <span class="tag" id="trashRest"></span>
+                  <span class="tag" id="trashSpecial"></span>
                 </div>
               </div>
             </div>
@@ -346,7 +346,7 @@
           <div class="mapTop">
             <div class="mapBadge" id="mapHint">Karte (OpenStreetMap)</div>
             <div class="mapBadges">
-              <a class="mapBadge" id="mapsBtn" href="#" role="button">Google Maps öffnen</a>
+              <a class="mapBadge" id="mapsBtn" href="#" role="button"></a>
             </div>
           </div>
 
@@ -354,9 +354,7 @@
             <iframe id="osmIframe" title="OpenStreetMap"></iframe>
           </div>
 
-          <div class="mapFallback" id="mapFallback">
-            Karte konnte nicht geladen werden (Netz/Tracking-Block). Bitte den Button „Google Maps öffnen“ nutzen.
-          </div>
+          <div class="mapFallback" id="mapFallback"></div>
         </div>
       </div>
 
@@ -376,9 +374,9 @@
                 <h3 id="firstAidTitle">Erste Hilfe & Sammelpunkt</h3>
                 <p id="safetyText"></p>
                 <div class="tagRow">
-                  <span class="tag" id="firstAidTag">First Aid: Studio</span>
-                  <span class="tag" id="extTag">Extinguisher: Eingang/Studio</span>
-                  <span class="tag" id="assemblyTag">Assembly: Parkfläche vor dem Haus</span>
+                  <span class="tag" id="firstAidTag"></span>
+                  <span class="tag" id="extTag"></span>
+                  <span class="tag" id="assemblyTag"></span>
                 </div>
               </div>
               <div class="item">
@@ -397,18 +395,17 @@
             <div class="list">
               <div class="item">
                 <h3 id="downloadsTitle">Download / Infos</h3>
-                <p id="downloadsText">Optional: PDF-Hausregeln, Stromplan, Ansprechpartnerliste.</p>
+                <p id="downloadsText"></p>
                 <div class="btnRow">
-                  <a class="btn" id="rulesPdfBtn" href="#" role="button">Hausregeln PDF</a>
-                  <a class="btn" id="powerPdfBtn" href="#" role="button">Stromplan</a>
+                  <a class="btn" id="factsheetBtn" href="#" role="button" target="_blank" rel="noopener"></a>
                 </div>
               </div>
 
               <div class="item">
                 <h3 id="feedbackTitle">Feedback</h3>
-                <p id="feedbackText">Wenn etwas hakt: kurzer Ping hilft uns, es sofort zu fixen.</p>
+                <p id="feedbackText"></p>
                 <div class="btnRow">
-                  <a class="btn primary" id="feedbackBtn" href="#" role="button">Feedback senden</a>
+                  <a class="btn primary" id="feedbackBtn" href="#" role="button"></a>
                 </div>
               </div>
             </div>
@@ -421,9 +418,9 @@
 
   <div class="sticky">
     <div class="stickyInner">
-      <div class="stickyLeft" id="stickyLeft">Tipp: WLAN kopieren → an Team weiterleiten.</div>
+      <div class="stickyLeft" id="stickyLeft"></div>
       <div class="stickyRight">
-        <button class="btn" id="copyAllBtn" type="button">Alles kopieren</button>
+        <button class="btn" id="copyAllBtn" type="button"></button>
       </div>
     </div>
   </div>
@@ -483,8 +480,13 @@
         ]
       },
 
-      downloads: { rulesPdf: "", powerPdf: "" },
-      feedback: { mailto: "mailto:studio@hangar.example?subject=Hangar%20Studio%20Feedback&body=Hi%20Team%2C%0A%0AFeedback%3A%20" }
+      downloads: {
+        factsheetPdf: "assets/factsheet_hangar_studio.pdf"
+      },
+
+      feedback: {
+        mailto: "mailto:studio@hangar.example?subject=Hangar%20Studio%20Feedback&body=Hi%20Team%2C%0A%0AFeedback%3A%20"
+      }
     };
 
     const I18N = {
@@ -515,9 +517,8 @@
         facility: "Facility",
         links: "Quick Links",
         downloads: "Download / Infos",
-        downloadsText: "Optional: PDF-Hausregeln, Stromplan, Ansprechpartnerliste.",
-        rulesPdf: "Hausregeln PDF",
-        powerPdf: "Stromplan",
+        downloadsText: "Hier kann ein kurzes Factsheet zum Haus abgelegt werden.",
+        factSheet: "Fact Sheet",
         feedbackTitle: "Feedback",
         feedbackText: "Wenn etwas hakt: kurzer Ping hilft uns, es sofort zu fixen.",
         feedbackBtn: "Feedback senden",
@@ -552,9 +553,8 @@
         facility: "Facility",
         links: "Quick links",
         downloads: "Downloads / info",
-        downloadsText: "Optional: house rules PDF, power plan, contact list.",
-        rulesPdf: "House rules PDF",
-        powerPdf: "Power plan",
+        downloadsText: "A short house fact sheet can be stored here.",
+        factSheet: "Fact Sheet",
         feedbackTitle: "Feedback",
         feedbackText: "If anything is off: a quick note helps us fix it immediately.",
         feedbackBtn: "Send feedback",
@@ -612,6 +612,7 @@
 
     function renderAll(){
       const t = I18N[LANG];
+
       $("welcomeSub").textContent = t.sub;
       $("emergencyLabel").textContent = t.emergency;
       $("quickInfoTitle").textContent = t.quick;
@@ -626,13 +627,17 @@
       $("deliveryTitle").textContent = t.delivery;
       $("loadinTitle").textContent = t.loadin;
       $("trashTitle").textContent = t.trash;
+
       $("mapHint").textContent = t.map;
       $("mapsBtn").textContent = t.openGmaps;
 
       $("parkingTitle").textContent = t.parkingTitle;
       $("parkingHeadline").textContent = t.parkingHeadline;
+      $("parkingText").textContent = CONFIG.parkingText[LANG];
+
       $("safetyTitle").textContent = t.safety;
       $("firstAidTitle").textContent = t.firstAid;
+      $("safetyText").textContent = CONFIG.safetyText[LANG];
       $("numbersTitle").textContent = t.numbers;
       $("emergencyInlineLabel").textContent = t.emergencyInline;
       $("studioLabel").textContent = t.studio;
@@ -641,8 +646,8 @@
       $("linksTitle").textContent = t.links;
       $("downloadsTitle").textContent = t.downloads;
       $("downloadsText").textContent = t.downloadsText;
-      $("rulesPdfBtn").textContent = t.rulesPdf;
-      $("powerPdfBtn").textContent = t.powerPdf;
+      $("factsheetBtn").textContent = t.factSheet;
+
       $("feedbackTitle").textContent = t.feedbackTitle;
       $("feedbackText").textContent = t.feedbackText;
       $("feedbackBtn").textContent = t.feedbackBtn;
@@ -650,11 +655,15 @@
       $("stickyLeft").textContent = t.sticky;
       $("copyAllBtn").textContent = t.copyAll;
 
-      $("parkingText").textContent = CONFIG.parkingText[LANG];
       $("loadinText").textContent = CONFIG.loadinText[LANG];
-      $("accessTag").textContent = CONFIG.accessTag[LANG];
-      $("trashText").textContent = CONFIG.trashText[LANG];
-      $("safetyText").textContent = CONFIG.safetyText[LANG];
+      $("accessTag").textContent = (LANG==="de") ? "Zufahrt: Parkfläche vor dem Haus" : "Access: parking area in front";
+      $("rampTag").textContent = (LANG==="de") ? "Rampe: nach Absprache" : "Ramp: on request";
+      $("quietTag").textContent = (LANG==="de") ? "Ruhezeiten beachten" : "Respect quiet hours";
+
+      $("trashPaper").textContent = (LANG==="de") ? "Papier" : "Paper";
+      $("trashYellow").textContent = (LANG==="de") ? "Gelb" : "Recycling";
+      $("trashRest").textContent = (LANG==="de") ? "Rest" : "Residual";
+      $("trashSpecial").textContent = (LANG==="de") ? "Sondermüll → Meldung" : "Hazardous → report";
 
       $("firstAidTag").textContent = (LANG==="de") ? "First Aid: Studio" : "First aid: studio";
       $("extTag").textContent = (LANG==="de") ? "Extinguisher: Eingang/Studio" : "Extinguisher: entrance/studio";
@@ -695,6 +704,7 @@
     }
 
     function init(){
+      // Base content
       const now = new Date();
       $("todayChip").textContent = now.toLocaleDateString("de-DE", { weekday:"long", year:"numeric", month:"2-digit", day:"2-digit" });
 
@@ -715,13 +725,10 @@
       $("mapsBtn").href = CONFIG.mapsQuery;
       $("feedbackBtn").href = CONFIG.feedback.mailto;
 
-      const rulesPdf = $("rulesPdfBtn");
-      const powerPdf = $("powerPdfBtn");
-      if (CONFIG.downloads.rulesPdf){ rulesPdf.href = CONFIG.downloads.rulesPdf; rulesPdf.style.display="inline-flex"; }
-      else { rulesPdf.style.display="none"; }
-      if (CONFIG.downloads.powerPdf){ powerPdf.href = CONFIG.downloads.powerPdf; powerPdf.style.display="inline-flex"; }
-      else { powerPdf.style.display="none"; }
+      // Factsheet
+      $("factsheetBtn").href = CONFIG.downloads.factsheetPdf;
 
+      // Copy actions
       $("copyWifiBtn").addEventListener("click", async () => {
         await copyToClipboard(wifiString());
         $("stickyLeft").textContent = (LANG==="de") ? "WLAN kopiert ✅" : "Wi-Fi copied ✅";
@@ -744,22 +751,28 @@ Load-in: ${CONFIG.loadinText[LANG]}
 
 ${LANG==="de" ? "Parken" : "Parking"}: ${CONFIG.parkingText[LANG]}
 
+Fact Sheet: ${location.origin ? (location.origin + location.pathname.replace(/\/index\.html?$/,"/") + CONFIG.downloads.factsheetPdf) : CONFIG.downloads.factsheetPdf}
+
 Maps: ${CONFIG.mapsQuery}`;
         await copyToClipboard(text);
         $("stickyLeft").textContent = (LANG==="de") ? "Alles kopiert ✅" : "Copied ✅";
         setTimeout(() => $("stickyLeft").textContent = I18N[LANG].sticky, 1800);
       });
 
+      // Language
       $("langDeBtn").addEventListener("click", () => setLang("de"));
       $("langEnBtn").addEventListener("click", () => setLang("en"));
 
+      // Theme
       $("themeAutoBtn").addEventListener("click", () => applyThemePref("auto"));
       $("themeLightBtn").addEventListener("click", () => applyThemePref("light"));
       $("themeDarkBtn").addEventListener("click", () => applyThemePref("dark"));
       applyThemePref(getThemePref());
 
+      // Render initial language
       setLang("de");
 
+      // OSM embed
       loadOsmMapForAddress(CONFIG.addressText).catch(() => {
         $("mapFrame").style.display = "none";
         $("mapFallback").style.display = "";
